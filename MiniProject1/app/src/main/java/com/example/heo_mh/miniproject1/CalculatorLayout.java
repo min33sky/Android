@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 /**
  * Created by Heo-MH on 2017-02-17.
+ * 계산기 레이아웃
  */
 
 public class CalculatorLayout extends Fragment {

@@ -9,7 +9,7 @@
         <item
             android:id="@+id/nav_temp"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Temp" />
+            android:title="List" />
     </group>
 
     <item android:title="Communicate">

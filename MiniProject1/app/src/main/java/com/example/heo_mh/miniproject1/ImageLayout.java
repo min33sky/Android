@@ -24,6 +24,9 @@ public class ImageLayout extends Fragment {
         view = inflater.inflate(R.layout.image_main, container, false);
         String[] items = {"오렌지 쥬스", "망고 쥬스", "파인애플 쥬스", "사과 쥬스", "딸기 쥬스"};
 
+        /*
+            Fragment에서 context를 가져올 땐 getActivity()를 사용한다.
+         */
         ListAdapter adapter = new ImageAdapter(getActivity(), items);
         ListView listView = (ListView) view.findViewById(R.id.listview);
         listView.setAdapter(adapter);
