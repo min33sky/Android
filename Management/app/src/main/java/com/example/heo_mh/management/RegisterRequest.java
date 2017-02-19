@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class RegisterRequest extends StringRequest {
 
+    // 웹서버 주소
     final static private String URL = "http://121.137.217.100:3003/auth/register";
     private Map<String, String> parameters;
 

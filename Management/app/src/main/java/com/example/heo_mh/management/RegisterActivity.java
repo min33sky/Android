@@ -1,6 +1,5 @@
 package com.example.heo_mh.management;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -27,9 +26,9 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText passwordText = (EditText) findViewById(R.id.passwordText);
         final EditText nameText = (EditText) findViewById(R.id.nameText);
         final EditText ageText = (EditText) findViewById(R.id.ageText);
-
         Button registerButton = (Button) findViewById(R.id.registerButton);
 
+        // 들록 버튼
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,20 +42,25 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(String response) {
                             try {
+                                // 웹서버로부터 JSON 객체를 받아온다.
                                 JSONObject jsonResponse = new JSONObject(response);
                                 boolean success = jsonResponse.getBoolean("success");
+                                // 등록 성공시 액티비티 전환
                                 if(success){
 //                                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
 //                                    builder.setMessage("회원 등록에 성공했습니다.")
 //                                            .setPositiveButton("확인", null)
 //                                            .create()
 //                                            .show();
+
                                     Toast.makeText(RegisterActivity.this, "회원 등록 성공", Toast.LENGTH_SHORT).show();
 
-                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                    RegisterActivity.this.startActivity(intent);
+//                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+//                                    RegisterActivity.this.startActivity(intent);
+                                    finish();
 
                                 }else{
+                                    // 등록 실패시 다이얼로그 출력
                                     AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                                     builder.setMessage("회원 등록에 실패했습니다.")
                                             .setNegativeButton("다시 시도", null)
@@ -69,6 +73,8 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                         }
                     };
+
+                    // 웹서버로 데이터 전송
                     RegisterRequest registerRequest = new RegisterRequest(userID, userPassword, userName, userAge, resStringListener);
                     RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
                     queue.add(registerRequest);

@@ -7,22 +7,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Heo-MH on 2017-02-18.
+ * Created by Heo-MH on 2017-02-19.
  */
 
-public class LoginRequest extends StringRequest {
+public class DeleteRequest extends StringRequest{
 
-    // 로그인 서버 주소
-    final static private String URL = "http://121.137.217.100:3003/auth/login";
+    final static private String URL = "http://121.137.217.100:3003/auth/delete";
     private Map<String, String> parameters;
 
-    public LoginRequest(String userID, String userPassword, Response.Listener<String> listener) {
+    public DeleteRequest(String userID, Response.Listener<String> listener) {
+        // POST방식, 웹서버 Path, Resonse LIstener, Error Listener
         super(Method.POST, URL, listener, null);
         parameters = new HashMap<>();
         parameters.put("userID", userID);
-        parameters.put("userPassword", userPassword);
     }
-
 
     @Override
     protected Map<String, String> getParams() {
