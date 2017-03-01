@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String userID = idText.getText().toString();
+                final String userID = idText.getText().toString();
                 String userPassword = passwordText.getText().toString();
 
                 Response.Listener<String> resonseListener = new Response.Listener<String>() {
@@ -58,9 +58,9 @@ public class LoginActivity extends AppCompatActivity {
                             if(success){
                                 Toast.makeText(getApplicationContext(), "로그인 성공 :)", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.putExtra("userID", userID);  // 로그인 한 아이디를 메인으로 보낸다.(공유용)
                                 LoginActivity.this.startActivity(intent);
                                 finish();
-
                             }else{
                                 AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                                 dialog = builder.setMessage("로그인에 실패하였습니다....")

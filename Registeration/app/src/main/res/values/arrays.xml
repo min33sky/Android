@@ -2,26 +2,69 @@
 <resources>
     <string-array name="major">
         <item>가정교육과</item>
+        <item>컴퓨터교육과</item>
         <item>교육학과</item>
         <item>국어교육과</item>
         <item>기술교육과</item>
         <item>독어교육과</item>
         <item>물리교육과</item>
         <item>미술교육과</item>
-        <item>불어교육과</item>
-        <item>생물교육과</item>
-        <item>수학교육과</item>
-        <item>역사교육과</item>
-        <item>영어교육과</item>
-        <item>유아교육과</item>
-        <item>음악교육과</item>
-        <item>윤리교육과</item>
-        <item>일반사회교육과</item>
-        <item>중국어교육과</item>
-        <item>지구과학교육과</item>
-        <item>지리교육과</item>
-        <item>체육교육과</item>
-        <item>초등교육과</item>
-        <item>컴퓨터교육과</item>
+        <item>대학원전공1</item>
+        <item>대학원전공2</item>
+        <item>대학원전공3</item>
     </string-array>
+
+    <string-array name="year">
+        <item>2017년도</item>
+        <item>2018년도</item>
+        <item>2019년도</item>
+        <item>2020년도</item>
+    </string-array>
+
+    <string-array name="term">
+        <item>1학기</item>
+        <item>여름학기</item>
+        <item>2학기</item>
+        <item>겨울학기</item>
+    </string-array>
+
+    <string-array name="graduateArea">
+        <item>일반대학원</item>
+    </string-array>
+
+    <string-array name="universityArea">
+        <item>교양및기타</item>
+        <item>전공</item>
+    </string-array>
+
+    <!-- 대학원 학과 -->
+    <string-array name="graduateMajor">
+        <item>대학원1</item>
+        <item>대학원2</item>
+        <item>대학원3</item>
+    </string-array>
+
+    <!-- 교양 과목 -->
+    <string-array name="universityRefinementMajor">
+        <item>교양1</item>
+        <item>교양2</item>
+        <item>교양3</item>
+        <item>교양4</item>
+        <item>교양5</item>
+    </string-array>
+
+    <!-- 학과 -->
+    <string-array name="universityMajor">
+        <item>가정교육과</item>
+        <item>컴퓨터교육과</item>
+        <item>교육학과</item>
+        <item>국어교육과</item>
+        <item>기술교육과</item>
+        <item>독어교육과</item>
+        <item>물리교육과</item>
+        <item>미술교육과</item>
+    </string-array>
+
+
+
 </resources>

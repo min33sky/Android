@@ -1,5 +1,6 @@
 package com.example.heo_mh.registeration;
 
+import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -21,19 +23,27 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
-    메인 화면
+/**
+ * 메인 화면
  */
 public class MainActivity extends AppCompatActivity {
 
     private ListView noticeListView;
     private NoticeListAdapter adapter;
     private List<Notice> noticeList;
+    public static String userID;        // 앱 전체에서 ID값 사용 허용
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // 화면을 세로로 고정시킨다.
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        // ID값 초기화(로그인 한 ID)
+        userID = getIntent().getStringExtra("userID");
+
 
         // 공지 사항 관련 세팅 : 리스트뷰 & 어댑터
         noticeListView = (ListView) findViewById(R.id.noticeListView);
@@ -106,7 +116,11 @@ public class MainActivity extends AppCompatActivity {
         new BackgroundTask().execute();
     }
 
-    // 공지사항 리스트를 불러오는 클래스
+
+
+    /**
+     * 공지사항을 가져오는 클래스
+     */
     class BackgroundTask extends AsyncTask<Void, Void, String>{
 
         String target;  // 공지 사항을 가져올 웹 서버 주소
@@ -116,8 +130,10 @@ public class MainActivity extends AppCompatActivity {
             target = "http://121.137.217.100:3003/notice/list";
         }
 
-        /*
-            서버에서 응답한 값들을 가져와서 String으로 리턴
+        /**
+         * 서버에서 응답한 것을 파싱해서 리턴해준다.
+         * @param params : JSON Response Value
+         * @return  : String
          */
         @Override
         protected String doInBackground(Void... params) {
@@ -148,8 +164,9 @@ public class MainActivity extends AppCompatActivity {
             super.onProgressUpdate(values);
         }
 
-        /*
-            실행 전에 서버에서 가져온 값들을 세팅
+        /**
+         * 실행 전에 값들을 전부 할당한다.
+         * @param result : doInBackground() 리턴값
          */
         @Override
         protected void onPostExecute(String result) {
@@ -165,10 +182,28 @@ public class MainActivity extends AppCompatActivity {
                     noticeList.add(new Notice(noticeContent,noticeName,noticeDate));
                     count++;
                 }
-
+                // 새로 고침 (내가 추가했다)
+                adapter.notifyDataSetChanged();
             }catch (Exception e){
                 e.printStackTrace();
             }
         }
+    }
+
+
+    private long lastTimeBackPressed;
+
+    /**
+     * 두번 뒤로가기 버튼을 누르면 프로그램 종료
+     */
+    @Override
+    public void onBackPressed() {
+        // 1.5초안에 다시 누르면 종료
+        if(System.currentTimeMillis() - lastTimeBackPressed < 1500){
+            finish();
+            return;
+        }
+        Toast.makeText(this, "'뒤로' 버튼을 한 번 더 눌러 종료합니다.", Toast.LENGTH_SHORT).show();
+        lastTimeBackPressed = System.currentTimeMillis();
     }
 }
